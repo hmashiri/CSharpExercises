@@ -89,52 +89,153 @@ namespace CSharpExercises
          * 10 * 8 = 80
          * 10 * 9 = 90
          * 10 * 10 = 10 */
-        
+
         public static string PrintTimesTable(int NumberInput)
         {
-
-            string TimesTableString;
-            int index;
-            int items;
-            
-            string[] TimesTableArray = new String[10];
-
-            for (index = 0; index < 10; index++)
+            // var returnString = "";
+            var products = 0;
+            string TimesTablePrint = "";
+            for (var i = 1; i < 10; i++)
             {
-                items = (index + 1) * NumberInput;
-                TimesTableArray[index] = $"{NumberInput} * {index + 1} = {items}";
+                products = NumberInput * i;
+                TimesTablePrint += NumberInput + " * " + i + " = " + products + "\r\n";
             }
 
-            TimesTableString = string.Join("\r\n", TimesTableArray);
-            return TimesTableString;
+            TimesTablePrint += NumberInput + " * " + 10 + " = " + (NumberInput * 10);
+            return TimesTablePrint;
+
         }
 
 
 
         // 9. Create a method called ConvertKelvinToFahrenheit that accepts a double representing a temperature in kelvin and returns a double containing the temperature in Fahrenheit.
+
+        public static double ConvertKelvinToFahrenheit(double KelvinTemp)
+        {
+            double FahrenheitTemp = (9d / 5d * (KelvinTemp - 273.15d) + 32d);
+            return FahrenheitTemp = Math.Round(FahrenheitTemp, 2);
+        }
+
         // 10. Create a method called GetAverageHard that accepts an array of integers and returns the average value as a double. (No built in functions allowed)
+        
+        public static double GetAverageHard(int[] integers)
+        {
+            
+            double results = 0;
+            double average = 0;
+
+           for (var i = 0; i < integers.Length; i++)
+            {
+                results += integers[i];
+            }
+
+            average = results / integers.Length;
+            return average;
+        }
         // 11. Create a method called GetAverageEasy that accepts an array of integers and returns the average value as a double. (Using only built in functions)
+
+        public static double GetAverageEasy(int[] integers)
+        {
+            double AvgValue = integers.Average();
+            Console.WriteLine(AvgValue);
+            return AvgValue;
+        }
         // 12. Create a method called DrawTriangle that accepts two integers - number and width and returns a string containing a drawn triangle using the number parameter.
         /* e.g. Number: 8, Width: 8 should return
          * 88888888
-         * 8888888
+         * 8888888  
          * 888888
          * 88888
          * 8888
          * 888
          * 88
          * 8 */
+        public static string DrawTriangle(int number, int width)
+        {
+            string Triangle = "";
+            for (var i = width; i >= 0; i--)
+            {
+                for (var j = i; j >= 1; j--)
+                {
+                    Triangle += number.ToString();
+                }
+                if (i >= 2)
+                {
+                    Triangle += System.Environment.NewLine;
+                }
+            }
+
+            return Triangle;
+        }
+
 
         // 13. Create a method called GetMilesPerHour that accepts a double representing distance and three integers representing hours, minutes and seconds. The method should return the speed in MPH rounded to the nearest whole number as a string. (e.g. "55MPH")
 
+        public static string GetMilesPerHour(double distance, int hours, int minutes, int seconds)
+        {
+            string speedMPH;
+            double calSpeed;
+            float MinsInHour = (float)minutes / 60;
+            float SecsInHour = (float)seconds / 3600;
+            float TotalTime = hours + MinsInHour + SecsInHour;
+            calSpeed = Math.Round(distance / TotalTime);
+            speedMPH = Convert.ToString(calSpeed);
+            return speedMPH + "MPH";
+        }
 
         // 14. Create a method called IsVowel that accepts a char parameter and returns true if the parameter is a vowel or false if the parameter is a consonant.
+        public static Boolean IsVowel(char CharacterInput)
+        {
+            Boolean isVowel = "aeiouAEIOU".IndexOf(CharacterInput) >= 0;
+            return isVowel;
+        }
+        
         // 15. Create a method called IsConsonant that accepts a char parameter and returns true if the parameter is a consonant or false if the parameter is a vowel.
+        public static Boolean IsConsonant(char CharacterInput)
+        {
+            Boolean IsConsonant = "aeiouAEIOU".IndexOf(CharacterInput) < 0;
+            return IsConsonant;
+        }
+        
         // 16. The Collatz conjecture, named after Lothar Collatz of Germany, proposed the following conjecture in 1937. 
         // Beginning with an integer n > 1, repeat the following until n == 1. If n is even, halve it. If n is odd, triple it and add 1. Following these steps, the function will always arrive at the number 1.
         // Create a method called CollatzConjecture that accepts an integer and returns the number of steps required to get to n == 1 as an integer.
 
+       public static int CollatzConjecture(int integer)
+        {
+            int NumberOfSteps = 0;
+
+            while (integer > 1)
+            {
+                if (integer % 2 == 0)
+                {
+                    integer = integer / 2;
+                    NumberOfSteps++;
+                }
+
+                else
+                { 
+                    integer = (3 * integer) + 1;
+                    NumberOfSteps++;
+                }
+            }
+            return NumberOfSteps;
+        }
+
         // 17. Create a method called GetNext7Days that accepts a DateTime object and returns an array of DateTime objects containing the next 7 days (including the given day).
+
+        public static DateTime[] GetNext7Days(DateTime date)
+        {
+
+            DateTime[] next7Days = new DateTime[7];
+
+            for (int i = 0; i < 7; i++)
+            {
+                next7Days[i] = date.AddDays(i);
+            }
+            return next7Days;
+        }
+
         // 18. Create a method called IsInLeapYear that accepts a DateTime object and returns true if the date falls within a leap year and false if not. (No built in functions allowed)
         // 19. Create a method called MortgageCalculator that accepts 2 decimals representing loan balance and interest rate, an integer representing loan term in years, and an integer representing the payment period.
         /* Payment periods: 1 - Monthly, 2 - Bi-Monthly (Every 2 months) */
