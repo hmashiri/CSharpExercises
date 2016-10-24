@@ -237,9 +237,41 @@ namespace CSharpExercises
         }
 
         // 18. Create a method called IsInLeapYear that accepts a DateTime object and returns true if the date falls within a leap year and false if not. (No built in functions allowed)
+       public static Boolean IsInLeapYear(int year)
+        {
+            if (year % 400 == 0)
+            {
+                return true;
+            }
+            else if (year % 100 == 0)
+            {
+                return false;
+            }
+            else if (year % 4 == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // 19. Create a method called MortgageCalculator that accepts 2 decimals representing loan balance and interest rate, an integer representing loan term in years, and an integer representing the payment period.
         /* Payment periods: 1 - Monthly, 2 - Bi-Monthly (Every 2 months) */
+        public static double MortgageCalculator(double LoanBalance, double InterestRate, int LoanTermInYears, int PaymentPeriod)
+        {
+            double mortgagePayment = 0;
+            double x = 0;
+            double YearlyInterestRatep = InterestRate / 100;
+            double monthlyInterestRatep = YearlyInterestRatep / 12;
+            int monthsOfPaymentOverTerm = LoanTermInYears * PaymentPeriod;
 
+            x = Math.Pow((1 + monthlyInterestRatep), monthsOfPaymentOverTerm);
+
+            mortgagePayment = (LoanBalance * YearlyInterestRatep * x) / (12 * (x - 1));
+            return Math.Round(mortgagePayment, 2);
+    }
         // 20. Create a method called DuckGoose that accepts an integer. Iterate from 1 to this integer, building a string along the way.
         // If the current number in the iteration:
         //   Is divisible by 3, append "Duck" + Environment.NewLine; to the string.
@@ -268,7 +300,34 @@ namespace CSharpExercises
          * 19
          * Goose
          */
-
+        public static string DuckGoose(int n)
+        {
+            string x = "";
+            for (int i = 1; i < n + 1; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    x += "DuckGoose";
+                }
+                else if (i % 3 == 0)
+                {
+                    x += "Duck";
+                }
+                else if (i % 5 == 0)
+                {
+                    x += "Goose";
+                }
+                else
+                {
+                    x += i;
+                }
+                if (i < n)
+                {
+                    x += Environment.NewLine;
+                }
+            }
+            return x;
+        }
         // If you've finished all these challenges, sign up for CodeWars.com and try to complete a few C# challenges there!
     }
 }
